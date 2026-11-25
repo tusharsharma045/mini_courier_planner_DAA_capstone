@@ -1,9 +1,9 @@
 """
-===============================================================================
+
   Mini-Courier Planner - Main Entry Point
   Capstone Project: Design & Analysis of Algorithms (ETCCDA302)
   K.R. Mangalam University, Gurugram
-===============================================================================
+
   This script orchestrates all 5 phases of the capstone project in sequence.
   Run this file to execute the complete courier planning pipeline.
 
