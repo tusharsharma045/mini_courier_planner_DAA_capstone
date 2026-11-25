@@ -1,10 +1,10 @@
-========================================================================
-        MINI-COURIER PLANNER  —  PHASE 1: DESIGN OVERVIEW
-========================================================================
 
-========================================================================
+        MINI-COURIER PLANNER  —  PHASE 1: DESIGN OVERVIEW
+
+
+
   1. PROBLEM STATEMENT
-========================================================================
+
 
   A courier company wants a data-driven system to:
     (a) Rank parcels by urgency and value                (Sorting)
@@ -15,9 +15,9 @@
   All four modules connect as a sequential pipeline — output from each
   stage feeds the next.
 
-========================================================================
+
   2. PARCEL DATASET  (parcels.csv)
-========================================================================
+
 
   Loaded 15 parcels:
 
@@ -46,9 +46,9 @@ P015       1.5kg     6.0L         2        3d      72
     deadline_days → Days until cutoff; primary key for Merge Sort
     value_score   → Business value; value/weight ratio drives Quick Sort
 
-========================================================================
+
   3. DELIVERY GRAPH  (delivery_graph.json)
-========================================================================
+
 
   Nodes (8): Warehouse, A, B, C, D, E, F, G
   Edges (16): undirected, weighted in km
@@ -68,9 +68,9 @@ P015       1.5kg     6.0L         2        3d      72
     Runtime repr → Python dict: node → list of (neighbour, distance) tuples
     Undirected   → each edge stored in both directions for O(degree) lookup
 
-========================================================================
+
   4. ALGORITHM SELECTION MAP
-========================================================================
+
 
   ┌─────────────────────────────────────────────────────────────────────┐
   │  Phase  │  Algorithm              │  Purpose                        │
@@ -94,9 +94,9 @@ P015       1.5kg     6.0L         2        3d      72
   │         │                         │  selected stops once            │
   └─────────┴─────────────────────────┴─────────────────────────────────┘
 
-========================================================================
+
   5. INTEGRATION PIPELINE
-========================================================================
+
 
   Step 1 — SORTING (Phase 2)
     Input  : All 15 parcels from parcels.csv
@@ -119,6 +119,6 @@ P015       1.5kg     6.0L         2        3d      72
     Process: Nearest-Neighbour heuristic starting at Warehouse.
     Output : Ordered tour → Warehouse → … → Warehouse
 
-========================================================================
+
   Phase 1 design complete. Proceed to phase2_sorting_knapsack.py
-========================================================================
+
