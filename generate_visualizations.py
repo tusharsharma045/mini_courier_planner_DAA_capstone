@@ -66,9 +66,9 @@ def generate_charts():
     plt.close()
     print(f"[OK] Generated: {chart_path}")
 
-    # -------------------------------------------------------------
+    # 
     # 2. Delivery Route Map (Graph & Tour Visualisation)
-    # -------------------------------------------------------------
+    
     fig, ax = plt.subplots(figsize=(10, 8))
 
     # Coordinates for nodes

@@ -1,7 +1,7 @@
 """
-=============================================================================
+
 MINI-COURIER PLANNER — PHASE 2: SORTING & KNAPSACK
-=============================================================================
+
 
 This module implements:
   A) Three sorting algorithms applied to the parcel dataset
@@ -15,16 +15,15 @@ This module implements:
 
 All algorithms are implemented from scratch (no built-in sort used for
 the primary ordering).  Standard library modules only (csv, copy, os).
-=============================================================================
+
 """
 
 import csv
 import copy
 import os
 
-# ---------------------------------------------------------------------------
 # Paths
-# ---------------------------------------------------------------------------
+# 
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
 PARCEL_CSV = os.path.join(BASE_DIR, "data", "parcels.csv")
 
@@ -32,9 +31,7 @@ PARCEL_CSV = os.path.join(BASE_DIR, "data", "parcels.csv")
 MAX_WEIGHT = 50    # kg
 MAX_VOLUME = 100   # litres
 
-# ---------------------------------------------------------------------------
 # Utility helpers
-# ---------------------------------------------------------------------------
 
 def separator(char="=", width=72):
     print(char * width)
@@ -88,15 +85,11 @@ def load_parcels(filepath):
     return parcels
 
 
-# ===========================================================================
 # SECTION A — SORTING ALGORITHMS
-# ===========================================================================
 
-# ---------------------------------------------------------------------------
 # 1. MERGE SORT
 #    Key: (deadline_days ASC, priority ASC)
 #    Rationale: parcels due soonest and most urgent should be delivered first.
-# ---------------------------------------------------------------------------
 
 def _merge(left, right, key_fn):
     """Merge two sorted sublists using key_fn for comparison.
@@ -179,11 +172,9 @@ def run_merge_sort(parcels):
     return sorted_parcels
 
 
-# ---------------------------------------------------------------------------
 # 2. QUICK SORT
 #    Key: value_score / weight_kg  DESCENDING  (highest value density first)
 #    Rationale: load the most profit per kg first when space is limited.
-# ---------------------------------------------------------------------------
 
 def _partition(arr, low, high, key_fn, pivot_log):
     """Lomuto partition scheme.
@@ -254,12 +245,10 @@ def run_quick_sort(parcels):
     return data
 
 
-# ---------------------------------------------------------------------------
 # 3. INSERTION SORT
 #    Key: priority  ASCENDING  (priority 1 = most urgent)
 #    Rationale: list is likely nearly sorted by priority already; insertion
 #               sort shines on nearly-sorted data with O(n) best-case.
-# ---------------------------------------------------------------------------
 
 def run_insertion_sort(parcels):
     section("SORT 3 — INSERTION SORT  (priority ASC)")
@@ -311,9 +300,8 @@ def run_insertion_sort(parcels):
     return data
 
 
-# ===========================================================================
+
 # SECTION B — DUAL-CONSTRAINT 0/1 KNAPSACK (DYNAMIC PROGRAMMING)
-# ===========================================================================
 
 def knapsack_dual(parcels, max_weight, max_volume):
     """0/1 Knapsack with dual constraints: weight AND volume.
@@ -347,7 +335,7 @@ def knapsack_dual(parcels, max_weight, max_volume):
     # We use two layers: prev (item i-1) and curr (item i)
     prev = [[0] * (V + 1) for _ in range(W + 1)]
 
-    # --- Forward pass -------------------------------------------------------
+    # --- Forward pass 
     for i in range(n):
         curr = [[0] * (V + 1) for _ in range(W + 1)]
         wi, vi, val = weights[i], volumes[i], values[i]
@@ -365,7 +353,7 @@ def knapsack_dual(parcels, max_weight, max_volume):
 
     best_value = prev[W][V]
 
-    # --- Back-track to find which items were selected -----------------------
+    # --- Back-track to find which items were selected 
     selected = []
     w, v = W, V
     for i in range(n - 1, -1, -1):
@@ -475,7 +463,7 @@ def run_knapsack(parcels):
     total_volume = sum(volumes[i] for i in selected_indices)
     total_value  = sum(values[i]  for i in selected_indices)
 
-    # ── DP Snippet ─────────────────────────────────────────────────────────
+    # ── DP Snippet 
     print("\n  ── DP Table Snippet  (weight axis 0–10, volume axis 0–20) ──")
     print("     Showing dp after each of the first 5 items processed.")
     print()
@@ -500,7 +488,7 @@ def run_knapsack(parcels):
             print(row)
         print()
 
-    # ── Results ────────────────────────────────────────────────────────────
+    # ── Results 
     separator("-")
     print("  SELECTED PARCELS  (packed into van)")
     separator("-")
@@ -527,9 +515,8 @@ def run_knapsack(parcels):
     return selected_parcels
 
 
-# ===========================================================================
+
 # MAIN
-# ===========================================================================
 
 def main():
     separator("=")
@@ -546,7 +533,7 @@ def main():
     quick_sorted    = run_quick_sort(parcels)
     insertion_sorted = run_insertion_sort(parcels)
 
-    # ── SORTING COMPARISON ──────────────────────────────────────────────────
+    # ── SORTING COMPARISON 
     section("SORTING ALGORITHM COMPARISON SUMMARY")
     print("""
   ┌──────────────────┬──────────────┬────────────┬──────────────────────────┐
@@ -568,7 +555,7 @@ def main():
   the tiny n=15 dataset.
 """)
 
-    # ── KNAPSACK ─────────────────────────────────────────────────────────────
+    # ── KNAPSACK 
     # Use the merge-sorted order as input to the knapsack (deadline priority)
     selected = run_knapsack(merge_sorted)
 

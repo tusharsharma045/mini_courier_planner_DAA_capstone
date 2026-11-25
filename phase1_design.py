@@ -1,7 +1,7 @@
 """
-=============================================================================
+
 MINI-COURIER PLANNER — PHASE 1: DESIGN DOCUMENT
-=============================================================================
+
 
 Project Title  : Mini-Courier Planner (Capstone)
 Phase          : 1 — Problem Clarity, Algorithm Selection & Data Design
@@ -21,7 +21,7 @@ work together as a pipeline:
                  (Phase 2)    (Phase 2)    (Phase 3)   (Phase 3)
 
 ALGORITHM SELECTION RATIONALE
-------------------------------
+
   • Merge Sort / Quick Sort / Insertion Sort
         → Phase 2 | Rank parcels by deadline, priority and value density
         → Different sorts serve different business views of the same data
@@ -39,7 +39,7 @@ ALGORITHM SELECTION RATIONALE
           visits every delivery stop exactly once and returns to warehouse
 
 DATA DESIGN
------------
+
   parcels.csv  — 15 records; attributes per parcel:
       parcel_id    : unique identifier (P001–P015)
       weight_kg    : physical weight (0.5–15.0 kg)
@@ -53,24 +53,21 @@ DATA DESIGN
       edges : list of [u, v, distance_km] triples (≥ 15 edges)
       format: adjacency-list built at runtime for O(1) neighbour lookup
 
-=============================================================================
+
 """
 
 import csv
 import json
 import os
 
-# ---------------------------------------------------------------------------
 # Paths
-# ---------------------------------------------------------------------------
+
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR   = os.path.join(BASE_DIR, "data")
 PARCEL_CSV = os.path.join(DATA_DIR, "parcels.csv")
 GRAPH_JSON = os.path.join(DATA_DIR, "delivery_graph.json")
 
-# ---------------------------------------------------------------------------
 # Helpers
-# ---------------------------------------------------------------------------
 
 def separator(char="=", width=72):
     print(char * width)
@@ -114,9 +111,8 @@ def load_graph(filepath):
     return nodes, edges, adj
 
 
-# ---------------------------------------------------------------------------
+# 
 # Display helpers
-# ---------------------------------------------------------------------------
 
 def print_parcels(parcels):
     header = (f"{'ID':<6} {'Weight':>8} {'Volume':>8} {'Priority':>9}"
@@ -139,9 +135,7 @@ def print_adjacency_list(adj):
         print(f"  {node:<12} → {nbr_str}")
 
 
-# ---------------------------------------------------------------------------
 # Main
-# ---------------------------------------------------------------------------
 
 def main():
     separator("=")
@@ -149,7 +143,7 @@ def main():
     separator("=")
     print()
 
-    # ── Problem Statement ──────────────────────────────────────────────────
+    # ── Problem Statement
     section("1. PROBLEM STATEMENT")
     print("""
   A courier company wants a data-driven system to:
@@ -162,7 +156,7 @@ def main():
   stage feeds the next.
 """)
 
-    # ── Parcel Dataset ─────────────────────────────────────────────────────
+    # ── Parcel Dataset 
     section("2. PARCEL DATASET  (parcels.csv)")
     parcels = load_parcels(PARCEL_CSV)
     print(f"\n  Loaded {len(parcels)} parcels:\n")
@@ -176,7 +170,7 @@ def main():
     value_score   → Business value; value/weight ratio drives Quick Sort
 """)
 
-    # ── Delivery Graph ─────────────────────────────────────────────────────
+    # ── Delivery Graph 
     section("3. DELIVERY GRAPH  (delivery_graph.json)")
     nodes, edges, adj = load_graph(GRAPH_JSON)
     print(f"\n  Nodes ({len(nodes)}): {', '.join(nodes)}")
@@ -190,7 +184,7 @@ def main():
     Undirected   → each edge stored in both directions for O(degree) lookup
 """)
 
-    # ── Algorithm Map ──────────────────────────────────────────────────────
+    # ── Algorithm Map 
     section("4. ALGORITHM SELECTION MAP")
     print("""
   ┌─────────────────────────────────────────────────────────────────────┐
@@ -216,7 +210,7 @@ def main():
   └─────────┴─────────────────────────┴─────────────────────────────────┘
 """)
 
-    # ── Integration Pipeline ───────────────────────────────────────────────
+    # ── Integration Pipeline 
     section("5. INTEGRATION PIPELINE")
     print("""
   Step 1 — SORTING (Phase 2)

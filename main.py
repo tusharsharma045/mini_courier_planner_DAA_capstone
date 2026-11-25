@@ -16,14 +16,14 @@
       Phase 3 - Route Maker and Graph Processing (Dijkstra + TSP)
       Phase 4 - Performance Testing and Optimization
       Phase 5 - Final Report and Demonstration
-===============================================================================
+
 """
 
 import sys
 import os
 import time
 
-# ─── Colour helpers (works on most terminals) ───────────────────────────────
+# ─── Colour helpers (works on most terminals) 
 RESET  = "\033[0m"
 BOLD   = "\033[1m"
 CYAN   = "\033[96m"

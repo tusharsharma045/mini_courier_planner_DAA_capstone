@@ -1,14 +1,14 @@
 """
-===============================================================================
+
   Phase 5 – Final Report and Demonstration
   Mini-Courier Planner | ETCCDA302 Capstone
-===============================================================================
+
   This module:
     • Loads all outputs produced by phases 1-4
     • Prints a structured final report with result explanations
     • Demonstrates the full pipeline end-to-end with a worked example
     • Summarises algorithm choices, complexities, and design decisions
-===============================================================================
+
 """
 
 import os
@@ -19,15 +19,14 @@ import time
 import copy
 
 
-# ─── Colour helpers ──────────────────────────────────────────────────────────
+# ─── Colour helpers 
 RESET  = "\033[0m"; BOLD = "\033[1m"; CYAN = "\033[96m"
 GREEN  = "\033[92m"; YELLOW = "\033[93m"; RED = "\033[91m"
 BLUE   = "\033[94m"; MAGENTA = "\033[95m"
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+
 #  Helpers – re-implement core algorithms for a self-contained demonstration
-# ═══════════════════════════════════════════════════════════════════════════
 
 def load_parcels(path: str = "data/parcels.csv"):
     parcels = []
@@ -383,9 +382,7 @@ def section_7_screenshots():
 """)
 
 
-# ═══════════════════════════════════════════════════════════════════════════
 #  Main
-# ═══════════════════════════════════════════════════════════════════════════
 
 def main():
     parcels    = load_parcels()

@@ -1,6 +1,6 @@
 """
 Mini-Courier Planner — Phase 4: Performance Analysis
-=====================================================
+
 Covers:
   1. Sorting algorithm comparisons  (Merge, Quick, Insertion, Built-in)
   2. Knapsack DP runtime scaling
@@ -26,9 +26,7 @@ random.seed(RANDOM_SEED)
 # How many timing repetitions per experiment
 REPS = 5
 
-# ─────────────────────────────────────────────────────────────────────────────
 # UTILITY HELPERS
-# ─────────────────────────────────────────────────────────────────────────────
 
 def timed_runs(func, *args, reps=REPS):
     """
@@ -60,9 +58,7 @@ def section(title):
     print("=" * 65)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # SORTING ALGORITHMS  (implemented from scratch)
-# ─────────────────────────────────────────────────────────────────────────────
 
 def merge_sort(arr):
     """
@@ -150,9 +146,7 @@ def builtin_sort(arr):
     arr.sort()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # KNAPSACK  (0/1 DP)
-# ─────────────────────────────────────────────────────────────────────────────
 
 def knapsack_01(weights, values, capacity):
     """
@@ -182,9 +176,8 @@ def generate_knapsack_instance(n, seed=RANDOM_SEED):
     return weights, values, capacity
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+
 # DIJKSTRA  (reused from phase 3, self-contained copy)
-# ─────────────────────────────────────────────────────────────────────────────
 
 INF = float("inf")
 
@@ -247,9 +240,7 @@ def generate_random_graph(n_nodes, seed=RANDOM_SEED):
     return dict(graph), nodes
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # SECTION 1: SORTING COMPARISONS
-# ─────────────────────────────────────────────────────────────────────────────
 
 def run_sorting_benchmarks():
     section("SORTING ALGORITHM RUNTIME COMPARISON")
@@ -297,9 +288,7 @@ def run_sorting_benchmarks():
     return results, sizes
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # SECTION 2: KNAPSACK RUNTIME SCALING
-# ─────────────────────────────────────────────────────────────────────────────
 
 def run_knapsack_benchmarks():
     section("KNAPSACK DP RUNTIME SCALING")
@@ -318,9 +307,8 @@ def run_knapsack_benchmarks():
     return knapsack_results
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+
 # SECTION 3: DIJKSTRA RUNTIME SCALING
-# ─────────────────────────────────────────────────────────────────────────────
 
 def run_dijkstra_benchmarks():
     section("DIJKSTRA RUNTIME SCALING (randomly generated graphs)")
@@ -341,9 +329,7 @@ def run_dijkstra_benchmarks():
     return dijkstra_results
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # SECTION 4: ASCII BAR CHART
-# ─────────────────────────────────────────────────────────────────────────────
 
 def print_ascii_bar_chart(results, sizes):
     """
@@ -368,9 +354,8 @@ def print_ascii_bar_chart(results, sizes):
             print(f"  {name:<17} | {bar:<{BAR_WIDTH}} | {ms(t)}")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+
 # SECTION 5: ANALYSIS & OPTIMIZATION COMMENTARY
-# ─────────────────────────────────────────────────────────────────────────────
 
 ANALYSIS = """
 ╔══════════════════════════════════════════════════════════════════╗
@@ -456,9 +441,7 @@ def print_analysis():
     print(ANALYSIS)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # MAIN
-# ─────────────────────────────────────────────────────────────────────────────
 
 def main():
     print("\n" + "#" * 65)

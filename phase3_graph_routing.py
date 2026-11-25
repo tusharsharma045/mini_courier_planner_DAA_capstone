@@ -15,9 +15,8 @@ import json
 import os
 import collections
 
-# ─────────────────────────────────────────────────────────────────────────────
+
 # 1.  GRAPH BUILDING
-# ─────────────────────────────────────────────────────────────────────────────
 
 # Hardcoded fallback edge list  (u, v, weight) — undirected
 FALLBACK_EDGES = [
@@ -92,9 +91,8 @@ def print_adjacency_list(graph):
     print("=" * 60)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # 2.  DIJKSTRA'S ALGORITHM  (from scratch)
-# ─────────────────────────────────────────────────────────────────────────────
+
 
 INF = float("inf")
 
@@ -202,10 +200,7 @@ def print_dijkstra_results(graph, source="Warehouse"):
     return dist, prev
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # 3.  NEAREST-NEIGHBOR TSP APPROXIMATION  (from scratch)
-# ─────────────────────────────────────────────────────────────────────────────
-
 def build_cost_matrix(graph, nodes):
     """
     Compute all-pairs shortest-path costs between the given nodes.
@@ -285,9 +280,8 @@ def print_tsp_results(graph, delivery_stops):
     return route, total_dist, legs, cost
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # 4.  FORMATTED DELIVERY ROUTE PLAN
-# ─────────────────────────────────────────────────────────────────────────────
+
 
 def print_route_summary(route, leg_distances):
     """
@@ -318,27 +312,26 @@ def print_route_summary(route, leg_distances):
     print("=" * 60)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+
 # MAIN
-# ─────────────────────────────────────────────────────────────────────────────
 
 def main():
     print("\n" + "#" * 60)
     print("  MINI-COURIER PLANNER — PHASE 3: GRAPH ROUTING")
     print("#" * 60)
 
-    # ── 1. Load / build graph ───────────────────────────────────────────────
+    # ── 1. Load / build graph 
     graph, edges = load_graph()
     print_adjacency_list(graph)
 
-    # ── 2. Dijkstra from Warehouse ──────────────────────────────────────────
+    # ── 2. Dijkstra from Warehouse 
     dist, prev = print_dijkstra_results(graph, source="Warehouse")
 
-    # ── 3. TSP approximation ────────────────────────────────────────────────
+    # ── 3. TSP approximation 
     delivery_stops = ["Warehouse", "A", "B", "C", "D", "E", "F", "G"]
     route, total_dist, legs, cost = print_tsp_results(graph, delivery_stops)
 
-    # ── 4. Route summary ────────────────────────────────────────────────────
+    # ── 4. Route summary 
     print_route_summary(route, legs)
 
     print("\n[Phase 3 complete]\n")
